@@ -14,4 +14,4 @@ var user_repo_1 = require("./repository/user-repo");
 //Create and configure container
 var userContainer = new inversify_1.Container();
 exports.userContainer = userContainer;
-userContainer.bind(types_1.TYPES.UserService).to(user_repo_1.UserService);
+userContainer.bind(types_1.TYPES.UsersQuery).to(user_repo_1.UserService);

@@ -49,6 +49,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
+var User_1 = require("./../model/User");
 var user_repo_1 = require("./../repository/user-repo");
 var inversify_1 = require("inversify");
 var inversify_express_utils_1 = require("inversify-express-utils");
@@ -97,11 +98,11 @@ var UserController = /** @class */ (function () {
         });
     };
     // //Update an existing User
-    UserController.prototype.updateUserById = function (id, request) {
+    UserController.prototype.updateUser = function (id, request) {
         return this.userService.updateUser(request.params.id, request.body);
     };
     // Delete a User
-    UserController.prototype.deleteUserById = function (id, res) {
+    UserController.prototype.deleteUser = function (id, res) {
         return this.userService.deleteUser(id);
     };
     __decorate([
@@ -110,7 +111,7 @@ var UserController = /** @class */ (function () {
         __param(1, inversify_express_utils_1.response()),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
-        __metadata("design:returntype", Array)
+        __metadata("design:returntype", void 0)
     ], UserController.prototype, "getUsers", null);
     __decorate([
         inversify_express_utils_1.httpGet("/:id"),
@@ -118,7 +119,7 @@ var UserController = /** @class */ (function () {
         __param(1, inversify_express_utils_1.response()),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [String, Object]),
-        __metadata("design:returntype", Object)
+        __metadata("design:returntype", User_1.User)
     ], UserController.prototype, "getUserById", null);
     __decorate([
         inversify_express_utils_1.httpPost("/create"),
@@ -133,8 +134,8 @@ var UserController = /** @class */ (function () {
         __param(0, inversify_express_utils_1.requestParam("id")),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [String, Object]),
-        __metadata("design:returntype", Object)
-    ], UserController.prototype, "updateUserById", null);
+        __metadata("design:returntype", User_1.User)
+    ], UserController.prototype, "updateUser", null);
     __decorate([
         inversify_express_utils_1.httpDelete("/:id"),
         __param(0, inversify_express_utils_1.requestParam("id")),
@@ -142,10 +143,10 @@ var UserController = /** @class */ (function () {
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [String, Object]),
         __metadata("design:returntype", Array)
-    ], UserController.prototype, "deleteUserById", null);
+    ], UserController.prototype, "deleteUser", null);
     UserController = __decorate([
         inversify_express_utils_1.controller("/users"),
-        __param(0, inversify_1.inject(types_1.TYPES.UserService)),
+        __param(0, inversify_1.inject(types_1.TYPES.UsersQuery)),
         __metadata("design:paramtypes", [user_repo_1.UserService])
     ], UserController);
     return UserController;

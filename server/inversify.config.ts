@@ -1,3 +1,6 @@
+import { UsersQuery } from "./repository/user-repo.interface";
+import { UserController } from "./controllers/Usercontroller";
+
 import "reflect-metadata";
 import { Container } from "inversify";
 // import {
@@ -12,7 +15,7 @@ import { UserService } from "./repository/user-repo";
 //Create and configure container
 
 const userContainer = new Container();
-userContainer.bind<UserService>(TYPES.UserService).to(UserService);
+userContainer.bind<UsersQuery>(TYPES.UsersQuery).to(UserService);
 // userContainer.bind<CreateUserHandler>(TYPES.CreateUser).to(CreateUserHandler);
 // userContainer.bind<DeleteUserHandler>(TYPES.DeleteUser).to(DeleteUserHandler);
 // userContainer.bind<GetUserHandler>(TYPES.GetUser).to(GetUserHandler);

@@ -1,4 +1,5 @@
-import { User } from "./../repository/user-repo.interface";
+import { UsersQuery } from "./../repository/user-repo.interface";
+import { User } from "./../model/User";
 import { UserService } from "./../repository/user-repo";
 import { inject } from "inversify";
 import {
@@ -16,14 +17,14 @@ import * as express from "express";
 
 @controller("/users")
 export class UserController {
-  constructor(@inject(TYPES.UserService) private userService: UserService) {}
+  constructor(@inject(TYPES.UsersQuery) public userService: UserService) {}
 
   //Get all Users
   @httpGet("/")
-  private getUsers(
+  public getUsers(
     @request() req: express.Request,
     @response() res: express.Response
-  ): User[] {
+  ) {
     let users = this.userService.getUsers();
     if (users.length < 1) {
       res.status(404).json({ error: "users not found" });
@@ -60,7 +61,7 @@ export class UserController {
 
   // //Update an existing User
   @httpPut("/:id")
-  private updateUserById(
+  private updateUser(
     @requestParam("id") id: string,
     request: express.Request
   ): User {
@@ -69,7 +70,7 @@ export class UserController {
 
   // Delete a User
   @httpDelete("/:id")
-  private deleteUserById(
+  private deleteUser(
     @requestParam("id") id: string,
     @response() res: express.Response
   ): User[] {

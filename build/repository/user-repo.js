@@ -10,20 +10,7 @@ exports.UserService = void 0;
 var inversify_1 = require("inversify");
 var UserService = /** @class */ (function () {
     function UserService() {
-        this.users = [
-            {
-                id: "1",
-                name: "olasunkanmi",
-                email: "ola@gmail.com",
-                password: "$%&**^^%%^&*",
-            },
-            {
-                id: "2",
-                name: "abel",
-                email: "abel@gmail.com",
-                password: "$%&**^^%%^&*",
-            },
-        ];
+        this.users = [];
     }
     UserService.prototype.getUsers = function () {
         return this.users;

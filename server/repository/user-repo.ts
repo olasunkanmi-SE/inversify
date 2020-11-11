@@ -1,22 +1,10 @@
+import { User } from "./../model/User";
 import { injectable } from "inversify";
-import { User, getUsersService } from "./user-repo.interface";
+import { UsersQuery } from "./user-repo.interface";
 
 @injectable()
-export class UserService implements getUsersService {
-  private users: User[] = [
-    {
-      id: "1",
-      name: "olasunkanmi",
-      email: "ola@gmail.com",
-      password: "$%&**^^%%^&*",
-    },
-    {
-      id: "2",
-      name: "abel",
-      email: "abel@gmail.com",
-      password: "$%&**^^%%^&*",
-    },
-  ];
+export class UserService implements UsersQuery {
+  users: User[] = [];
 
   public getUsers(): User[] {
     return this.users;
