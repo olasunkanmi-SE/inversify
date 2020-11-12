@@ -7,9 +7,9 @@ export interface IUser {
 }
 
 export interface UsersQuery {
-  getUsers(): User[];
+  getUsers(): Promise<User[]>;
   updateUser(id: string, user: User): User;
-  getUserById(id: string): User;
+  getUserById(id: string): Promise<User>;
   createUser(user: User): User;
   deleteUser(id: string): User[];
 }

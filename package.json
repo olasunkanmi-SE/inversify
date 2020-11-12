@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:run": "nodemon ts-node-dev server.js",
-    "start:build": "tsc -w",
     "start": "concurrently npm:start:*"
   },
   "keywords": [],
@@ -23,6 +22,7 @@
     "inversify-express-utils": "^6.3.2",
     "morgan": "^1.10.0",
     "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.29",
     "typescript": "^4.0.3"
   },
   "devDependencies": {

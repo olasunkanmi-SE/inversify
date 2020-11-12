@@ -24,9 +24,9 @@ export class UserController {
   public getUsers(
     @request() req: express.Request,
     @response() res: express.Response
-  ) {
+  ): Promise<User[]> {
     let users = this.userService.getUsers();
-    if (users.length < 1) {
+    if (!users) {
       res.status(404).json({ error: "users not found" });
     }
     return users;
@@ -37,7 +37,7 @@ export class UserController {
   private getUserById(
     @requestParam("id") id: string,
     @response() res: express.Response
-  ): User {
+  ): Promise<User> {
     let user = this.userService.getUserById(id);
     if (!user) {
       res.status(404).json({ error: "user not found" });

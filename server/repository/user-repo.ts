@@ -4,16 +4,28 @@ import { UsersQuery } from "./user-repo.interface";
 
 @injectable()
 export class UserService implements UsersQuery {
-  users: User[] = [];
+  users: User[] = [
+    {
+      id: "1",
+      name: "olasunkanmi",
+      email: "ola@gmail.com",
+      password: "$%&**^^%%^&*",
+    },
+    {
+      id: "2",
+      name: "abel",
+      email: "abel@gmail.com",
+      password: "$%&**^^%%^&*",
+    },
+  ];
 
-  public getUsers(): User[] {
-    return this.users;
+  public async getUsers(): Promise<User[]> {
+    return await this.users;
   }
 
-  public getUserById(id: string): User {
+  public async getUserById(id: string): Promise<User> {
     let users = this.getUsers();
-    let user: any;
-    user = users.find((user) => user.id === id);
+    let user: any = (await users).find((user) => user.id === id);
     return user;
   }
 
@@ -26,11 +38,5 @@ export class UserService implements UsersQuery {
     return this.users.filter((user) => user.id !== id);
   }
 
-  public updateUser(id: string, updatedUser: User): User {
-    let user = this.getUserById(id);
-    user.name = updatedUser.name;
-    user.email = updatedUser.email;
-    user.password = updatedUser.password;
-    return user;
-  }
+  public updateUser(id: string, updatedUser: User): any {}
 }
