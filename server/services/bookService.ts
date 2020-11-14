@@ -1,7 +1,7 @@
+import { IBookRepository } from "./../repository/book-repo.interface";
 import { Repository } from "typeorm";
 import { inject, injectable } from "inversify";
 import { Book } from "../entities/book.entity";
-import { BookInterface } from "./../repository/book-repo.interface";
 import { TYPE } from "./../constants/types";
 import {
   controller,
@@ -13,14 +13,11 @@ import {
 } from "inversify-express-utils";
 
 @injectable()
-export class BookService implements BookInterface {
-  private readonly _bookRepository: Repository<Book>;
+export class BookService implements IBookRepository {
   public constructor(
-    @inject(TYPE.BookRepository) bookRepository: Repository<Book>
-  ) {
-    this._bookRepository = bookRepository;
-  }
+    @inject(TYPE.BookRepository) private bookRepository: Repository<Book>
+  ) {}
   public async getBooks(): Promise<Book[]> {
-    return await this._bookRepository.find();
+    return await this.bookRepository.find();
   }
 }

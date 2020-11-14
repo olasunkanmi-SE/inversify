@@ -1,9 +1,14 @@
+import { IBookRepository } from "./book-repo.interface";
 import { getConnection } from "typeorm";
 import { Book } from "../entities/book.entity";
 
-export function getRepository() {
-  const connection = getConnection();
-  const bookRepository = connection.getRepository(Book);
-  console.log(bookRepository);
-  return bookRepository;
+export class BookRepository implements IBookRepository {
+  public getBooks(searchoptions?: any): Promise<Book[]> {
+    const connection = getConnection();
+    //return type should be a book
+    const bookRepository = connection.getRepository(Book);
+    const books = bookRepository.find(searchoptions);
+    console.log(books);
+    return books;
+  }
 }

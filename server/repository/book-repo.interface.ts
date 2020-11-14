@@ -9,6 +9,6 @@ export interface IBook {
   year: number;
 }
 
-export interface BookInterface {
-  getBooks(): Promise<Book[]>;
+export interface IBookRepository {
+  getBooks(searchoptions?: any): Promise<Book[]>;
 }

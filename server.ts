@@ -1,21 +1,20 @@
 import "reflect-metadata";
 import { InversifyExpressServer } from "inversify-express-utils";
 import { containerBidings } from "./server/inversify.config";
-import { getRepository } from "./server/repository/book-repo";
+import { BookRepository } from "./server/repository/book-repo";
 import { Repository } from "typeorm";
 import { Book } from "./server/entities/book.entity";
 import { TYPE } from "./server/constants/types";
-import { BookService } from "./server/services/bookService";
 import { Container } from "inversify";
 import * as bodyParser from "body-parser";
 import * as morgan from "morgan";
 //Start the server
 const container = new Container();
-container.bind<BookService>(TYPE.BookInterface).to(BookService);
 container
   .bind<Repository<Book>>(TYPE.BookRepository)
-  .toDynamicValue(() => {
-    return getRepository();
+  .toDynamicValue((): any => {
+    const getRepository = new BookRepository();
+    return getRepository.getBooks();
   })
   .inRequestScope();
 container.loadAsync(containerBidings);

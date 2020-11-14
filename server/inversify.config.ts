@@ -1,20 +1,11 @@
 import "reflect-metadata";
-import { AsyncContainerModule, Container } from "inversify";
-import { Repository } from "typeorm";
-import { Book } from "./entities/book.entity";
+import { AsyncContainerModule } from "inversify";
 import { getDbConnection } from "./db";
-import { getRepository } from "./repository/book-repo";
 import { BookController } from "./controllers/BookController";
-import { TYPE } from "./constants/types";
 
 export const containerBidings = new AsyncContainerModule(async (bind) => {
   await getDbConnection();
   await BookController;
-  bind<Repository<Book>>(TYPE.BookRepository)
-    .toDynamicValue(() => {
-      return getRepository();
-    })
-    .inRequestScope();
 });
 
 //Create and configure container
