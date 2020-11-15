@@ -15,31 +15,31 @@ var Book = /** @class */ (function () {
     function Book() {
     }
     __decorate([
-        typeorm_1.PrimaryGeneratedColumn(),
+        typeorm_1.PrimaryGeneratedColumn({ type: "integer" }),
         __metadata("design:type", Number)
     ], Book.prototype, "id", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ type: "varchar", length: 256 }),
         __metadata("design:type", String)
     ], Book.prototype, "title", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ type: "varchar", length: 256 }),
         __metadata("design:type", String)
     ], Book.prototype, "author", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ type: "varchar", length: 256 }),
         __metadata("design:type", String)
     ], Book.prototype, "description", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ type: "varchar", length: 256 }),
         __metadata("design:type", String)
     ], Book.prototype, "genre", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ type: "integer" }),
         __metadata("design:type", Number)
     ], Book.prototype, "year", void 0);
     Book = __decorate([
-        typeorm_1.Entity("book")
+        typeorm_1.Entity({ name: "books" })
     ], Book);
     return Book;
 }());

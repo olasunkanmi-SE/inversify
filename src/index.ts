@@ -1,22 +1,20 @@
+import { IBookRepository } from "./repository/book-repo.interface";
 import "reflect-metadata";
 import { InversifyExpressServer } from "inversify-express-utils";
-import { containerBidings } from "./server/inversify.config";
-import { BookRepository } from "./server/repository/book-repo";
+import { containerBidings } from "./inversify.config";
+import { BookRepository } from "./repository/book-repo";
 import { Repository } from "typeorm";
-import { Book } from "./server/entities/book.entity";
-import { TYPE } from "./server/constants/types";
+import { Book } from "./entities/book.entity";
+import { TYPE } from "./constants/types";
 import { Container } from "inversify";
 import * as bodyParser from "body-parser";
 import * as morgan from "morgan";
 //Start the server
 const container = new Container();
 container
-  .bind<Repository<Book>>(TYPE.BookRepository)
-  .toDynamicValue((): any => {
-    const getRepository = new BookRepository();
-    return getRepository.getBooks();
-  })
-  .inRequestScope();
+  .bind<IBookRepository>(TYPE.BookRepository)
+  .to(BookRepository)
+  .inSingletonScope();
 container.loadAsync(containerBidings);
 let server = new InversifyExpressServer(container);
 
@@ -28,4 +26,6 @@ server.setConfig((app) => {
 });
 
 let app = server.build();
-app.listen(5000);
+app.listen(5000, () => {
+  console.log("Server is listening on port 5000");
+});

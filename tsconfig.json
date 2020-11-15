@@ -5,7 +5,7 @@
     "types": ["reflect-metadata"],
     "typeRoots": ["./node_modules/@types"],
     "outDir": "./build",
-    "rootDir": "./server",
+    "rootDir": "./src",
     "strict": true,
     "module": "commonjs",
     "moduleResolution": "node",
@@ -13,5 +13,6 @@
     "emitDecoratorMetadata": true
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "baseUrl": "./"
 }

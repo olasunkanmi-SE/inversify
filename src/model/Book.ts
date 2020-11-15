@@ -1,4 +1,4 @@
-import { IBook } from "./../repository/book-repo.interface";
+import { IBook } from "../repository/book-repo.interface";
 
 export class Book implements IBook {
   constructor(

@@ -1,15 +1,17 @@
 "use strict";
-module.exports.ormConfig = {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ormconfig = void 0;
+var Book_1 = require("./model/Book");
+exports.ormconfig = {
     type: "postgres",
-    host: process.env.DB_HOST || "localhost",
-    port: Number(process.env.DB_PORT) || 5432,
-    username: process.env.DB_USERNAME || "postgres",
-    password: process.env.DB_PASSWORD || "omowunmi@&8",
-    database: process.env.DB_NAME || "bookmanagement",
+    host: "localhost",
+    port: 5432,
+    username: "postgres",
+    password: "omowunmi@&8",
+    database: "bookmanagement",
     synchronize: true,
     logging: false,
-    options: { encrypt: true },
-    entities: ["build/**/*.entity{.js,.ts}"],
+    entities: [Book_1.Book],
     migrations: ["build/migrations/*{.js,.ts}"],
     cli: {
         migrationsDir: "build/migrations/",

@@ -1,8 +1,8 @@
-import { IBookRepository } from "./../repository/book-repo.interface";
+import { IBookRepository } from "../repository/book-repo.interface";
 import { Repository } from "typeorm";
 import { inject, injectable } from "inversify";
 import { Book } from "../entities/book.entity";
-import { TYPE } from "./../constants/types";
+import { TYPE } from "../constants/types";
 import {
   controller,
   httpGet,

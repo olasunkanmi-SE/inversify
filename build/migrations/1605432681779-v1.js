@@ -1,16 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -48,29 +36,35 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookService = void 0;
-var typeorm_1 = require("typeorm");
-var inversify_1 = require("inversify");
-var types_1 = require("../constants/types");
-var BookService = /** @class */ (function () {
-    function BookService(bookRepository) {
-        this.bookRepository = bookRepository;
+exports.v11605432681779 = void 0;
+var v11605432681779 = /** @class */ (function () {
+    function v11605432681779() {
+        this.name = "v11605432681779";
     }
-    BookService.prototype.getBooks = function () {
+    v11605432681779.prototype.up = function (queryRunner) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.bookRepository.find()];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 0: return [4 /*yield*/, queryRunner.query("CREATE TABLE \"books\" (\"id\" SERIAL NOT NULL, \"title\" character varying(256) NOT NULL, \"author\" character varying(256) NOT NULL, \"description\" character varying(256) NOT NULL, \"genre\" character varying(256) NOT NULL, \"year\" integer NOT NULL, CONSTRAINT \"PK_f3f2f25a099d24e12545b70b022\" PRIMARY KEY (\"id\"))")];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
                 }
             });
         });
     };
-    BookService = __decorate([
-        inversify_1.injectable(),
-        __param(0, inversify_1.inject(types_1.TYPE.BookRepository)),
-        __metadata("design:paramtypes", [typeorm_1.Repository])
-    ], BookService);
-    return BookService;
+    v11605432681779.prototype.down = function (queryRunner) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, queryRunner.query("DROP TABLE \"books\"")];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return v11605432681779;
 }());
-exports.BookService = BookService;
+exports.v11605432681779 = v11605432681779;

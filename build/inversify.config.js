@@ -39,16 +39,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.containerBidings = void 0;
 require("reflect-metadata");
 var inversify_1 = require("inversify");
-var db_1 = require("./db");
 var BookController_1 = require("./controllers/BookController");
 exports.containerBidings = new inversify_1.AsyncContainerModule(function (bind) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, db_1.getDbConnection()];
+            case 0: return [4 /*yield*/, BookController_1.BookController];
             case 1:
-                _a.sent();
-                return [4 /*yield*/, BookController_1.BookController];
-            case 2:
                 _a.sent();
                 return [2 /*return*/];
         }

@@ -1,5 +1,4 @@
-import { BookRepository } from "./../repository/book-repo";
-import { BookService } from "./../services/bookService";
+import { IBookRepository } from "../repository/book-repo.interface";
 import * as express from "express";
 import { inject } from "inversify";
 import {
@@ -17,7 +16,7 @@ import { Book } from "../entities/book.entity";
 @controller("/api/books")
 export class BookController {
   public constructor(
-    @inject(TYPE.BookRepository) public bookRepository: BookRepository
+    @inject(TYPE.BookRepository) public bookRepository: IBookRepository
   ) {}
   @httpGet("/")
   public async getBooks(@response() res: express.Response): Promise<Book[]> {

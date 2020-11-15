@@ -1,10 +1,9 @@
+import { Book } from "./model/Book";
 import "reflect-metadata";
 import { AsyncContainerModule } from "inversify";
-import { getDbConnection } from "./db";
 import { BookController } from "./controllers/BookController";
 
 export const containerBidings = new AsyncContainerModule(async (bind) => {
-  await getDbConnection();
   await BookController;
 });
 
