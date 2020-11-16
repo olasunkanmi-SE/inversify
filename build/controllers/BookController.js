@@ -47,6 +47,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookController = void 0;
 var types_1 = require("./../constants/types");
@@ -55,10 +62,24 @@ var express = require("express");
 var inversify_express_utils_1 = require("inversify-express-utils");
 var book_entity_1 = require("../entities/book.entity");
 var inversify_1 = require("inversify");
+var express_validator_1 = require("express-validator");
+var books_validation_1 = require("../middleware/books.validation");
+/**
+ * make API calls with this function *
+ * @param method
+ * @param api
+ * @param payLoad
+ */
 var BookController = /** @class */ (function () {
     function BookController(bookService) {
         this.bookService = bookService;
     }
+    /**
+     * make API calls with this function *
+     * @param method
+     * @param api
+     * @param payLoad
+     */
     BookController.prototype.getBooks = function (res) {
         return __awaiter(this, void 0, void 0, function () {
             var error_1;
@@ -78,21 +99,26 @@ var BookController = /** @class */ (function () {
             });
         });
     };
+    /**
+     * make API calls with this function *
+     * @param method
+     * @param api
+     * @param payLoad
+     */
     BookController.prototype.createBook = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var newBook, error_2;
+            var errors, newBook, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!(typeof req.body.title === "string") || req.body.title.length < 1) {
-                            res.status(400);
-                            res.send("Invalid Book!");
+                        _a.trys.push([0, 3, , 4]);
+                        errors = express_validator_1.validationResult(req);
+                        if (!errors.isEmpty()) {
+                            return [2 /*return*/, res.status(400).send(errors)];
                         }
-                        _a.label = 1;
+                        return [4 /*yield*/, new book_entity_1.Book()];
                     case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        newBook = new book_entity_1.Book();
-                        // const {title, author, genre, description, year} = newBook
+                        newBook = _a.sent();
                         newBook.title = req.body.title;
                         newBook.author = req.body.author;
                         newBook.genre = req.body.genre;
@@ -118,9 +144,8 @@ var BookController = /** @class */ (function () {
         __metadata("design:returntype", Promise)
     ], BookController.prototype, "getBooks", null);
     __decorate([
-        inversify_express_utils_1.httpPost("/create"),
-        __param(0, inversify_express_utils_1.request()),
-        __param(1, inversify_express_utils_1.response()),
+        inversify_express_utils_1.httpPost.apply(void 0, __spreadArrays(["/create"], books_validation_1.validateBookRequest)),
+        __param(0, inversify_express_utils_1.request()), __param(1, inversify_express_utils_1.response()),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)

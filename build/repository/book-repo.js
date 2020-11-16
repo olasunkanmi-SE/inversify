@@ -1,9 +1,4 @@
 "use strict";
-// import { TYPE } from "./../constants/types";
-// import { IBookRepository } from "./book-repo.interface";
-// import { Repository } from "typeorm";
-// import { Book } from "../entities/book.entity";
-// import { inject, injectable } from "inversify";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -51,18 +46,29 @@ exports.BookRepository = void 0;
 var typeorm_1 = require("typeorm");
 var book_entity_1 = require("../entities/book.entity");
 var inversify_1 = require("inversify");
+/**
+ * BookRepository class *
+ * @param bookRpo
+ */
 var BookRepository = /** @class */ (function () {
     function BookRepository() {
         this.bookRepo = new typeorm_1.Repository();
     }
+    /**
+     * Search Book repository with filter *
+     * @param searchoptions
+     * @type Book[]
+     */
     BookRepository.prototype.getBooks = function (searchoptions) {
         return __awaiter(this, void 0, void 0, function () {
             var books;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_1.createConnection().then(function (connection) {
-                            books = connection.manager.find(book_entity_1.Book);
-                        })];
+                    case 0:
+                        searchoptions = { author: "Chinua Achebe" };
+                        return [4 /*yield*/, typeorm_1.createConnection().then(function (connection) {
+                                books = connection.manager.find(book_entity_1.Book, searchoptions).then(function (allbooks) { return allbooks.sort(); });
+                            })];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, books];
@@ -70,17 +76,22 @@ var BookRepository = /** @class */ (function () {
             });
         });
     };
+    /**
+     * Create a new resource in the database *
+     * @param book
+     * @type Book
+     */
     BookRepository.prototype.createBook = function (book) {
         return __awaiter(this, void 0, void 0, function () {
-            var bok;
+            var newBook;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, typeorm_1.createConnection().then(function (connection) {
-                            bok = connection.manager.save(book);
+                            newBook = connection.manager.save(book);
                         })];
                     case 1:
                         _a.sent();
-                        return [2 /*return*/, bok];
+                        return [2 /*return*/, newBook];
                 }
             });
         });
@@ -91,3 +102,20 @@ var BookRepository = /** @class */ (function () {
     return BookRepository;
 }());
 exports.BookRepository = BookRepository;
+// import { TYPE } from "./../constants/types";
+// import { IBookRepository } from "./book-repo.interface";
+// import { Repository } from "typeorm";
+// import { Book } from "../entities/book.entity";
+// import { inject, injectable } from "inversify";
+// export class BookRepository implements IBookRepository {
+//   bookRepo = new Repository<Book>();
+//   async getBooks(searchoptions?: any): Promise<Book[]> {
+//     const bookRepository = this.bookRepo;
+//     const books = await bookRepository.find(searchoptions);
+//     return books;
+//   }
+//   async createBook(book: Book): Promise<Book> {
+//     return await this.bookRepo.save(book);
+//   }
+// }
+// ts-node node_modules/.bin/typeorm migration:generate -n v1

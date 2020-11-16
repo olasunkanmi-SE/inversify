@@ -1,17 +1,18 @@
 import { TYPE } from "./../constants/types";
 import { BookService } from "./../services/bookService";
 import * as express from "express";
-import {
-  controller,
-  httpGet,
-  httpPost,
-  response,
-  request,
-  requestParam,
-  requestBody,
-} from "inversify-express-utils";
+import { controller, httpGet, httpPost, response, request, requestParam, requestBody } from "inversify-express-utils";
 import { Book } from "../entities/book.entity";
 import { inject } from "inversify";
+import { validationResult } from "express-validator";
+import { validateBookRequest } from "../middleware/books.validation";
+
+/**
+ * make API calls with this function *
+ * @param method
+ * @param api
+ * @param payLoad
+ */
 
 @controller("/api/books")
 export class BookController {
@@ -19,6 +20,14 @@ export class BookController {
     @inject(TYPE.BookService)
     private bookService: BookService
   ) {}
+
+  /**
+   * make API calls with this function *
+   * @param method
+   * @param api
+   * @param payLoad
+   */
+
   @httpGet("/")
   async getBooks(@response() res: express.Response) {
     try {
@@ -28,18 +37,22 @@ export class BookController {
       res.send(error.message);
     }
   }
-  @httpPost("/create")
-  async createBook(
-    @request() req: express.Request,
-    @response() res: express.Response
-  ) {
-    if (!(typeof req.body.title === "string") || req.body.title.length < 1) {
-      res.status(400);
-      res.send("Invalid Book!");
-    }
+
+  /**
+   * make API calls with this function *
+   * @param method
+   * @param api
+   * @param payLoad
+   */
+
+  @httpPost("/create", ...validateBookRequest)
+  async createBook(@request() req: express.Request, @response() res: express.Response) {
     try {
-      let newBook = new Book();
-      // const {title, author, genre, description, year} = newBook
+      const errors: any = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).send(errors);
+      }
+      let newBook = await new Book();
       newBook.title = req.body.title;
       newBook.author = req.body.author;
       newBook.genre = req.body.genre;

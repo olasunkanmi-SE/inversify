@@ -1,3 +1,49 @@
+import { IBook } from "./book-repo.interface";
+import { TYPE } from "./../constants/types";
+import { IBookRepository } from "./book-repo.interface";
+import { createConnection, Repository, getConnection } from "typeorm";
+import { Book } from "../entities/book.entity";
+import { inject, injectable } from "inversify";
+
+/**
+ * BookRepository class *
+ * @param bookRpo
+ */
+
+@injectable()
+export class BookRepository implements IBookRepository {
+  bookRepo = new Repository<Book>();
+
+  /**
+   * Search Book repository with filter *
+   * @param searchoptions
+   * @type Book[]
+   */
+
+  async getBooks(searchoptions?: IBook): Promise<Book[]> {
+    searchoptions = { author: "Chinua Achebe" };
+    let books: any;
+    await createConnection().then((connection) => {
+      books = connection.manager.find(Book, searchoptions).then((allbooks) => allbooks.sort());
+    });
+    return books;
+  }
+
+  /**
+   * Create a new resource in the database *
+   * @param book
+   * @type Book
+   */
+
+  async createBook(book: Book): Promise<Book> {
+    let newBook: any;
+    await createConnection().then((connection) => {
+      newBook = connection.manager.save(book);
+    });
+    return newBook;
+  }
+}
+
 // import { TYPE } from "./../constants/types";
 // import { IBookRepository } from "./book-repo.interface";
 // import { Repository } from "typeorm";
@@ -17,29 +63,3 @@
 //   }
 // }
 // ts-node node_modules/.bin/typeorm migration:generate -n v1
-import { TYPE } from "./../constants/types";
-import { IBookRepository } from "./book-repo.interface";
-import { createConnection, Repository, getConnection } from "typeorm";
-import { Book } from "../entities/book.entity";
-import { inject, injectable } from "inversify";
-
-@injectable()
-export class BookRepository implements IBookRepository {
-  bookRepo = new Repository<Book>();
-  async getBooks(searchoptions?: any): Promise<Book[]> {
-    let books: any;
-    await createConnection().then((connection) => {
-      books = connection.manager.find(Book);
-    });
-    return books;
-  }
-
-  async createBook(book: Book): Promise<Book> {
-    let bok: any;
-
-    await createConnection().then((connection) => {
-      bok = connection.manager.save(book);
-    });
-    return bok;
-  }
-}
