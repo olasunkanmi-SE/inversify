@@ -49,7 +49,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookService = void 0;
-var typeorm_1 = require("typeorm");
 var inversify_1 = require("inversify");
 var types_1 = require("../constants/types");
 var BookService = /** @class */ (function () {
@@ -58,10 +57,26 @@ var BookService = /** @class */ (function () {
     }
     BookService.prototype.getBooks = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var books;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.bookRepository.find()];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 0: return [4 /*yield*/, this.bookRepository.getBooks()];
+                    case 1:
+                        books = _a.sent();
+                        return [2 /*return*/, books];
+                }
+            });
+        });
+    };
+    BookService.prototype.createBook = function (book) {
+        return __awaiter(this, void 0, void 0, function () {
+            var newBook;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.bookRepository.createBook(book)];
+                    case 1:
+                        newBook = _a.sent();
+                        return [2 /*return*/, newBook];
                 }
             });
         });
@@ -69,7 +84,7 @@ var BookService = /** @class */ (function () {
     BookService = __decorate([
         inversify_1.injectable(),
         __param(0, inversify_1.inject(types_1.TYPE.BookRepository)),
-        __metadata("design:paramtypes", [typeorm_1.Repository])
+        __metadata("design:paramtypes", [Object])
     ], BookService);
     return BookService;
 }());

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
+var bookService_1 = require("./services/bookService");
 var inversify_express_utils_1 = require("inversify-express-utils");
 var inversify_config_1 = require("./inversify.config");
 var book_repo_1 = require("./repository/book-repo");
@@ -14,6 +15,10 @@ container
     .bind(types_1.TYPE.BookRepository)
     .to(book_repo_1.BookRepository)
     .inSingletonScope();
+container
+    .bind(types_1.TYPE.BookService)
+    .to(bookService_1.BookService)
+    .inSingletonScope();
 container.loadAsync(inversify_config_1.containerBidings);
 var server = new inversify_express_utils_1.InversifyExpressServer(container);
 server.setConfig(function (app) {
@@ -23,6 +28,6 @@ server.setConfig(function (app) {
     app.use(bodyParser.json());
 });
 var app = server.build();
-app.listen(5000, function () {
+app.listen(4000, function () {
     console.log("Server is listening on port 5000");
 });

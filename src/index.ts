@@ -1,5 +1,6 @@
-import { IBookRepository } from "./repository/book-repo.interface";
 import "reflect-metadata";
+import { BookService } from "./services/bookService";
+import { IBookRepository } from "./repository/book-repo.interface";
 import { InversifyExpressServer } from "inversify-express-utils";
 import { containerBidings } from "./inversify.config";
 import { BookRepository } from "./repository/book-repo";
@@ -15,6 +16,10 @@ container
   .bind<IBookRepository>(TYPE.BookRepository)
   .to(BookRepository)
   .inSingletonScope();
+container
+  .bind<BookService>(TYPE.BookService)
+  .to(BookService)
+  .inSingletonScope();
 container.loadAsync(containerBidings);
 let server = new InversifyExpressServer(container);
 
@@ -26,6 +31,6 @@ server.setConfig((app) => {
 });
 
 let app = server.build();
-app.listen(5000, () => {
+app.listen(4000, () => {
   console.log("Server is listening on port 5000");
 });

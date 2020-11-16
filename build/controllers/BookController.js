@@ -49,23 +49,64 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookController = void 0;
+var types_1 = require("./../constants/types");
+var bookService_1 = require("./../services/bookService");
 var express = require("express");
-var inversify_1 = require("inversify");
 var inversify_express_utils_1 = require("inversify-express-utils");
-var types_1 = require("../constants/types");
+var book_entity_1 = require("../entities/book.entity");
+var inversify_1 = require("inversify");
 var BookController = /** @class */ (function () {
-    function BookController(bookRepository) {
-        this.bookRepository = bookRepository;
+    function BookController(bookService) {
+        this.bookService = bookService;
     }
     BookController.prototype.getBooks = function (res) {
         return __awaiter(this, void 0, void 0, function () {
-            var books;
+            var error_1;
             return __generator(this, function (_a) {
-                books = this.bookRepository.getBooks();
-                if (!books) {
-                    res.status(404).json({ error: "books not found" });
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.bookService.getBooks()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                    case 2:
+                        error_1 = _a.sent();
+                        res.status(500);
+                        res.send(error_1.message);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
                 }
-                return [2 /*return*/, books];
+            });
+        });
+    };
+    BookController.prototype.createBook = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var newBook, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(typeof req.body.title === "string") || req.body.title.length < 1) {
+                            res.status(400);
+                            res.send("Invalid Book!");
+                        }
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        newBook = new book_entity_1.Book();
+                        // const {title, author, genre, description, year} = newBook
+                        newBook.title = req.body.title;
+                        newBook.author = req.body.author;
+                        newBook.genre = req.body.genre;
+                        newBook.description = req.body.description;
+                        newBook.year = req.body.year;
+                        return [4 /*yield*/, this.bookService.createBook(newBook)];
+                    case 2: return [2 /*return*/, _a.sent()];
+                    case 3:
+                        error_2 = _a.sent();
+                        res.status(500);
+                        res.send(error_2.message);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
             });
         });
     };
@@ -76,10 +117,18 @@ var BookController = /** @class */ (function () {
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", Promise)
     ], BookController.prototype, "getBooks", null);
+    __decorate([
+        inversify_express_utils_1.httpPost("/create"),
+        __param(0, inversify_express_utils_1.request()),
+        __param(1, inversify_express_utils_1.response()),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", Promise)
+    ], BookController.prototype, "createBook", null);
     BookController = __decorate([
         inversify_express_utils_1.controller("/api/books"),
-        __param(0, inversify_1.inject(types_1.TYPE.BookRepository)),
-        __metadata("design:paramtypes", [Object])
+        __param(0, inversify_1.inject(types_1.TYPE.BookService)),
+        __metadata("design:paramtypes", [bookService_1.BookService])
     ], BookController);
     return BookController;
 }());

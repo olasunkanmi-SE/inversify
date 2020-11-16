@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ormconfig = void 0;
-var Book_1 = require("./model/Book");
-exports.ormconfig = {
+exports.ormConfig = void 0;
+// const Book = require("./src/entities/book.entity");
+exports.ormConfig = {
     type: "postgres",
     host: "localhost",
     port: 5432,
@@ -11,9 +11,9 @@ exports.ormconfig = {
     database: "bookmanagement",
     synchronize: true,
     logging: false,
-    entities: [Book_1.Book],
-    migrations: ["build/migrations/*{.js,.ts}"],
+    entities: ["./build/entities/**/*.entity.js"],
+    migrations: ["./build/migrations/*{.js,.ts}"],
     cli: {
-        migrationsDir: "build/migrations/",
+        migrationsDir: "./src/migrations/",
     },
 };

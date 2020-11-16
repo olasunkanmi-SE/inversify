@@ -8,7 +8,7 @@ module.exports = {
   database: "bookmanagement",
   synchronize: true,
   logging: false,
-  entities: ["./build/entities/**/*.entity.js"],
+  entities: [__dirname + "/../**/*.entity.{js,ts}"],
   migrations: ["./build/migrations/*{.js,.ts}"],
   cli: {
     migrationsDir: "./src/migrations/",

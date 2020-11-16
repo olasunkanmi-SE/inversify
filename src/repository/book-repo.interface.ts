@@ -11,4 +11,5 @@ export interface IBook {
 
 export interface IBookRepository {
   getBooks(searchoptions?: any): Promise<Book[]>;
+  createBook(book: Book): Promise<Book>;
 }
