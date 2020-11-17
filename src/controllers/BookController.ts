@@ -1,4 +1,4 @@
-import { Search } from "./../model/search";
+import { Search, Sort } from "./../model/search";
 import { TYPE } from "./../constants/types";
 import { BookService } from "./../services/bookService";
 import * as express from "express";
@@ -32,15 +32,20 @@ export class BookController {
   @httpGet("/")
   async getBooks(
     @response() res: express.Response,
-    @queryParam("order") order: number,
+    @queryParam("order") order: Sort,
     @queryParam("author") author: string,
+    @queryParam("genre") genre: string,
+    @queryParam("title") title: string,
+    @queryParam("year") year: number,
     @queryParam("skip") skip: number,
-    @queryParam("take") take: number
+    @queryParam("take") take: number,
+    @queryParam("id") id: number
   ) {
+    //Create the search Algorithm
     let searchOptions: Search = {
-      where: { author: author },
+      where: [{ title }, { author, year }, { genre }, { id }],
       order: {
-        year: order,
+        title: order,
       },
       skip: skip,
       take: take,
