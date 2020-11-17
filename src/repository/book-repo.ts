@@ -1,6 +1,6 @@
-import { IBook } from "./book-repo.interface";
+import { IBook } from "./../domain/book/bookproperties";
 import { IBookRepository } from "./book-repo.interface";
-import { getConnection, Repository } from "typeorm";
+import { getConnection } from "typeorm";
 import { Book } from "../entities/book.entity";
 import { injectable } from "inversify";
 
@@ -23,8 +23,15 @@ export class BookRepository implements IBookRepository {
    * @type Book[]
    */
 
-  async getBooks(searchoptions?: IBook): Promise<Book[]> {
-    searchoptions = { author: "Chinua Achebe" };
+  async getBooks(searchoptions: any): Promise<Book[]> {
+    searchoptions = {
+      author: "Chinua Achebe",
+      order: {
+        year: "ASC",
+      },
+      skip: 0,
+      take: 4,
+    };
     const books = await this.getBookRepository().then((bookRepository) => bookRepository.find(searchoptions));
     return books;
   }
