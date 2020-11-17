@@ -1,4 +1,4 @@
-import { IBook } from "../repository/book-repo.interface";
+import { IBook } from "./../domain/book/bookproperties";
 
 export class Book implements IBook {
   constructor(

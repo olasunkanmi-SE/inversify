@@ -27,5 +27,5 @@ server.setConfig(function (app) {
 var app = server.build();
 typeorm_1.createConnection();
 app.listen(4000, function () {
-    console.log("Server is listening on port 5000");
+    console.log("Server is listening on port 4000");
 });

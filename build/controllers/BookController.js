@@ -73,16 +73,16 @@ var BookController = /** @class */ (function () {
      * create the API endpoint to retieve books *
      * @param res
      */
-    BookController.prototype.getBooks = function (res, order, author, genre, title, year, skip, take, id) {
+    BookController.prototype.getBooks = function (res, sortOrder, author, genre, title, year, skip, take, id) {
         return __awaiter(this, void 0, void 0, function () {
             var searchOptions, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         searchOptions = {
-                            where: [{ title: title }, { author: author, year: year }, { genre: genre }, { id: id }],
+                            // where: [{ title }, { author }, { genre }, { id }, { year }],
                             order: {
-                                title: order,
+                                title: sortOrder,
                             },
                             skip: skip,
                             take: take,
@@ -141,7 +141,7 @@ var BookController = /** @class */ (function () {
     __decorate([
         inversify_express_utils_1.httpGet("/"),
         __param(0, inversify_express_utils_1.response()),
-        __param(1, inversify_express_utils_1.queryParam("order")),
+        __param(1, inversify_express_utils_1.queryParam("sortOrder")),
         __param(2, inversify_express_utils_1.queryParam("author")),
         __param(3, inversify_express_utils_1.queryParam("genre")),
         __param(4, inversify_express_utils_1.queryParam("title")),

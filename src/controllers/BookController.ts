@@ -32,7 +32,7 @@ export class BookController {
   @httpGet("/")
   async getBooks(
     @response() res: express.Response,
-    @queryParam("order") order: Sort,
+    @queryParam("sortOrder") sortOrder: Sort,
     @queryParam("author") author: string,
     @queryParam("genre") genre: string,
     @queryParam("title") title: string,
@@ -43,9 +43,9 @@ export class BookController {
   ) {
     //Create the search Algorithm
     let searchOptions: Search = {
-      where: [{ title }, { author, year }, { genre }, { id }],
+      // where: [{ title }, { author }, { genre }, { id }, { year }],
       order: {
-        title: order,
+        title: sortOrder,
       },
       skip: skip,
       take: take,
