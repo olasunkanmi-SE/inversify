@@ -55,6 +55,10 @@ var BookService = /** @class */ (function () {
     function BookService(bookRepository) {
         this.bookRepository = bookRepository;
     }
+    /**
+     * call the bookrepository's getbooks method to retrieve books *
+     * @type Book[]
+     */
     BookService.prototype.getBooks = function () {
         return __awaiter(this, void 0, void 0, function () {
             var books;
@@ -68,6 +72,11 @@ var BookService = /** @class */ (function () {
             });
         });
     };
+    /**
+     * call the bookrepository's createBook method to create a new book*
+     * @param book
+     * @type Book
+     */
     BookService.prototype.createBook = function (book) {
         return __awaiter(this, void 0, void 0, function () {
             var newBook;

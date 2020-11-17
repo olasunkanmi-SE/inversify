@@ -7,13 +7,6 @@ import { inject } from "inversify";
 import { validationResult } from "express-validator";
 import { validateBookRequest } from "../middleware/books.validation";
 
-/**
- * make API calls with this function *
- * @param method
- * @param api
- * @param payLoad
- */
-
 @controller("/api/books")
 export class BookController {
   private constructor(
@@ -22,10 +15,8 @@ export class BookController {
   ) {}
 
   /**
-   * make API calls with this function *
-   * @param method
-   * @param api
-   * @param payLoad
+   * create the API endpoint to retieve books *
+   * @param res
    */
 
   @httpGet("/")
@@ -39,10 +30,9 @@ export class BookController {
   }
 
   /**
-   * make API calls with this function *
-   * @param method
-   * @param api
-   * @param payLoad
+   * API call to create a book with a book validation middleware*
+   * @param req
+   * @param res
    */
 
   @httpPost("/create", ...validateBookRequest)

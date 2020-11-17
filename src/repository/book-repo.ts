@@ -1,18 +1,21 @@
 import { IBook } from "./book-repo.interface";
-import { TYPE } from "./../constants/types";
 import { IBookRepository } from "./book-repo.interface";
-import { createConnection, Repository, getConnection } from "typeorm";
+import { getConnection, Repository } from "typeorm";
 import { Book } from "../entities/book.entity";
-import { inject, injectable } from "inversify";
-
-/**
- * BookRepository class *
- * @param bookRpo
- */
+import { injectable } from "inversify";
 
 @injectable()
 export class BookRepository implements IBookRepository {
-  bookRepo = new Repository<Book>();
+  /**
+   * Create the connection to fetch books*
+   * @type Repository<Book>
+   *
+   */
+  bookRepository: any;
+  private async getBookRepository() {
+    this.bookRepository = await getConnection().getRepository(Book);
+    return this.bookRepository;
+  }
 
   /**
    * Search Book repository with filter *
@@ -22,10 +25,7 @@ export class BookRepository implements IBookRepository {
 
   async getBooks(searchoptions?: IBook): Promise<Book[]> {
     searchoptions = { author: "Chinua Achebe" };
-    let books: any;
-    await createConnection().then((connection) => {
-      books = connection.manager.find(Book, searchoptions).then((allbooks) => allbooks.sort());
-    });
+    const books = await this.getBookRepository().then((bookRepository) => bookRepository.find(searchoptions));
     return books;
   }
 
@@ -36,30 +36,7 @@ export class BookRepository implements IBookRepository {
    */
 
   async createBook(book: Book): Promise<Book> {
-    let newBook: any;
-    await createConnection().then((connection) => {
-      newBook = connection.manager.save(book);
-    });
+    let newBook = await this.getBookRepository().then((bookRepository) => bookRepository.save(book));
     return newBook;
   }
 }
-
-// import { TYPE } from "./../constants/types";
-// import { IBookRepository } from "./book-repo.interface";
-// import { Repository } from "typeorm";
-// import { Book } from "../entities/book.entity";
-// import { inject, injectable } from "inversify";
-
-// export class BookRepository implements IBookRepository {
-//   bookRepo = new Repository<Book>();
-//   async getBooks(searchoptions?: any): Promise<Book[]> {
-//     const bookRepository = this.bookRepo;
-//     const books = await bookRepository.find(searchoptions);
-//     return books;
-//   }
-
-//   async createBook(book: Book): Promise<Book> {
-//     return await this.bookRepo.save(book);
-//   }
-// }
-// ts-node node_modules/.bin/typeorm migration:generate -n v1

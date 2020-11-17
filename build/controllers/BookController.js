@@ -64,21 +64,13 @@ var book_entity_1 = require("../entities/book.entity");
 var inversify_1 = require("inversify");
 var express_validator_1 = require("express-validator");
 var books_validation_1 = require("../middleware/books.validation");
-/**
- * make API calls with this function *
- * @param method
- * @param api
- * @param payLoad
- */
 var BookController = /** @class */ (function () {
     function BookController(bookService) {
         this.bookService = bookService;
     }
     /**
-     * make API calls with this function *
-     * @param method
-     * @param api
-     * @param payLoad
+     * create the API endpoint to retieve books *
+     * @param res
      */
     BookController.prototype.getBooks = function (res) {
         return __awaiter(this, void 0, void 0, function () {
@@ -100,10 +92,9 @@ var BookController = /** @class */ (function () {
         });
     };
     /**
-     * make API calls with this function *
-     * @param method
-     * @param api
-     * @param payLoad
+     * API call to create a book with a book validation middleware*
+     * @param req
+     * @param res
      */
     BookController.prototype.createBook = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
