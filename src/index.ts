@@ -29,6 +29,6 @@ server.setConfig((app) => {
 //Start the server
 let app = server.build();
 createConnection();
-app.listen(4000, () => {
-  console.log("Server is listening on port 4000");
+app.listen(3000, () => {
+  console.log("Server is listening on port 3000");
 });
