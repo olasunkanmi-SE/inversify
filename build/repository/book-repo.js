@@ -74,16 +74,7 @@ var BookRepository = /** @class */ (function () {
             var books;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        searchoptions = {
-                            author: "Chinua Achebe",
-                            order: {
-                                year: "ASC",
-                            },
-                            skip: 0,
-                            take: 4,
-                        };
-                        return [4 /*yield*/, this.getBookRepository().then(function (bookRepository) { return bookRepository.find(searchoptions); })];
+                    case 0: return [4 /*yield*/, this.getBookRepository().then(function (bookRepository) { return bookRepository.find(searchoptions); })];
                     case 1:
                         books = _a.sent();
                         return [2 /*return*/, books];

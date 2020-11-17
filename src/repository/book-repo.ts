@@ -23,15 +23,7 @@ export class BookRepository implements IBookRepository {
    * @type Book[]
    */
 
-  async getBooks(searchoptions: any): Promise<Book[]> {
-    searchoptions = {
-      author: "Chinua Achebe",
-      order: {
-        year: "ASC",
-      },
-      skip: 0,
-      take: 4,
-    };
+  async getBooks(searchoptions?: any): Promise<Book[]> {
     const books = await this.getBookRepository().then((bookRepository) => bookRepository.find(searchoptions));
     return books;
   }

@@ -15,8 +15,8 @@ export class BookService implements IBookRepository {
    * @type Book[]
    */
 
-  async getBooks(): Promise<Book[]> {
-    const books = await this.bookRepository.getBooks();
+  async getBooks(searchoptions?: any): Promise<Book[]> {
+    const books = await this.bookRepository.getBooks(searchoptions);
     return books;
   }
 

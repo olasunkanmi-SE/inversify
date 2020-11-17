@@ -72,21 +72,31 @@ var BookController = /** @class */ (function () {
      * create the API endpoint to retieve books *
      * @param res
      */
-    BookController.prototype.getBooks = function (res) {
+    BookController.prototype.getBooks = function (res, order, author, skip, take) {
         return __awaiter(this, void 0, void 0, function () {
-            var error_1;
+            var searchOptions, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.bookService.getBooks()];
-                    case 1: return [2 /*return*/, _a.sent()];
-                    case 2:
+                        searchOptions = {
+                            where: { author: author },
+                            order: {
+                                year: order,
+                            },
+                            skip: skip,
+                            take: take,
+                        };
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.bookService.getBooks(searchOptions)];
+                    case 2: return [2 /*return*/, _a.sent()];
+                    case 3:
                         error_1 = _a.sent();
                         res.status(500);
                         res.send(error_1.message);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -130,8 +140,12 @@ var BookController = /** @class */ (function () {
     __decorate([
         inversify_express_utils_1.httpGet("/"),
         __param(0, inversify_express_utils_1.response()),
+        __param(1, inversify_express_utils_1.queryParam("order")),
+        __param(2, inversify_express_utils_1.queryParam("author")),
+        __param(3, inversify_express_utils_1.queryParam("skip")),
+        __param(4, inversify_express_utils_1.queryParam("take")),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
+        __metadata("design:paramtypes", [Object, Number, String, Number, Number]),
         __metadata("design:returntype", Promise)
     ], BookController.prototype, "getBooks", null);
     __decorate([

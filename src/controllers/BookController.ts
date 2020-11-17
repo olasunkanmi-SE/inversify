@@ -1,7 +1,17 @@
+import { Search } from "./../model/search";
 import { TYPE } from "./../constants/types";
 import { BookService } from "./../services/bookService";
 import * as express from "express";
-import { controller, httpGet, httpPost, response, request, requestParam, requestBody } from "inversify-express-utils";
+import {
+  controller,
+  httpGet,
+  httpPost,
+  response,
+  request,
+  requestParam,
+  requestBody,
+  queryParam,
+} from "inversify-express-utils";
 import { Book } from "../entities/book.entity";
 import { inject } from "inversify";
 import { validationResult } from "express-validator";
@@ -20,9 +30,23 @@ export class BookController {
    */
 
   @httpGet("/")
-  async getBooks(@response() res: express.Response) {
+  async getBooks(
+    @response() res: express.Response,
+    @queryParam("order") order: number,
+    @queryParam("author") author: string,
+    @queryParam("skip") skip: number,
+    @queryParam("take") take: number
+  ) {
+    let searchOptions: Search = {
+      where: { author: author },
+      order: {
+        year: order,
+      },
+      skip: skip,
+      take: take,
+    };
     try {
-      return await this.bookService.getBooks();
+      return await this.bookService.getBooks(searchOptions);
     } catch (error) {
       res.status(500);
       res.send(error.message);

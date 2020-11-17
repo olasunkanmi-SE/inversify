@@ -59,12 +59,12 @@ var BookService = /** @class */ (function () {
      * call the bookrepository's getbooks method to retrieve books *
      * @type Book[]
      */
-    BookService.prototype.getBooks = function () {
+    BookService.prototype.getBooks = function (searchoptions) {
         return __awaiter(this, void 0, void 0, function () {
             var books;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.bookRepository.getBooks()];
+                    case 0: return [4 /*yield*/, this.bookRepository.getBooks(searchoptions)];
                     case 1:
                         books = _a.sent();
                         return [2 /*return*/, books];
