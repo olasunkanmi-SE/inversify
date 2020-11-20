@@ -20,7 +20,7 @@ import { validateBookRequest } from "../middleware/books.validation";
 @controller("/api/books")
 export class BookController {
   private constructor(
-    @inject(TYPE.BookService)
+    @inject(TYPE.BookServiceRepository)
     private bookService: BookService
   ) {}
 

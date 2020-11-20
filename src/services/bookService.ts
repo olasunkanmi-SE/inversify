@@ -1,13 +1,14 @@
-import { IBookRepository } from "../repository/book-repo.interface";
+import { BookRepository } from "./../repository/book-repo";
+import { BookServiceInterface } from "./../repository/book-service.interface";
 import { inject, injectable } from "inversify";
 import { Book } from "../entities/book.entity";
 import { TYPE } from "../constants/types";
 
 @injectable()
-export class BookService implements IBookRepository {
+export class BookService implements BookServiceInterface {
   public constructor(
     @inject(TYPE.BookRepository)
-    private readonly bookRepository: IBookRepository
+    private readonly bookRepository: BookRepository
   ) {}
 
   /**
