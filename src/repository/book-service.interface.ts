@@ -1,6 +1,3 @@
-import { Book } from "../entities/book.entity";
+import { IBookRepository } from "./book-repo.interface";
 
-export interface BookServiceInterface {
-  getBooks(searchoptions?: any): Promise<Book[]>;
-  createBook(book: Book): Promise<Book>;
-}
+export interface BookServiceInterface extends IBookRepository {}

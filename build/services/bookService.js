@@ -49,7 +49,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookService = void 0;
-var book_repo_1 = require("./../repository/book-repo");
 var inversify_1 = require("inversify");
 var types_1 = require("../constants/types");
 var BookService = /** @class */ (function () {
@@ -94,7 +93,7 @@ var BookService = /** @class */ (function () {
     BookService = __decorate([
         inversify_1.injectable(),
         __param(0, inversify_1.inject(types_1.TYPE.BookRepository)),
-        __metadata("design:paramtypes", [book_repo_1.BookRepository])
+        __metadata("design:paramtypes", [Object])
     ], BookService);
     return BookService;
 }());

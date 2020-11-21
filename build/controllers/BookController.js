@@ -58,7 +58,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookController = void 0;
 var search_1 = require("./../model/search");
 var types_1 = require("./../constants/types");
-var bookService_1 = require("./../services/bookService");
 var express = require("express");
 var inversify_express_utils_1 = require("inversify-express-utils");
 var book_entity_1 = require("../entities/book.entity");
@@ -163,7 +162,7 @@ var BookController = /** @class */ (function () {
     BookController = __decorate([
         inversify_express_utils_1.controller("/api/books"),
         __param(0, inversify_1.inject(types_1.TYPE.BookServiceRepository)),
-        __metadata("design:paramtypes", [bookService_1.BookService])
+        __metadata("design:paramtypes", [Object])
     ], BookController);
     return BookController;
 }());

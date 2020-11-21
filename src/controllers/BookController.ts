@@ -1,3 +1,4 @@
+import { BookServiceInterface } from "./../repository/book-service.interface";
 import { Search, Sort } from "./../model/search";
 import { TYPE } from "./../constants/types";
 import { BookService } from "./../services/bookService";
@@ -21,7 +22,7 @@ import { validateBookRequest } from "../middleware/books.validation";
 export class BookController {
   private constructor(
     @inject(TYPE.BookServiceRepository)
-    private bookService: BookService
+    private bookService: BookServiceInterface
   ) {}
 
   /**
