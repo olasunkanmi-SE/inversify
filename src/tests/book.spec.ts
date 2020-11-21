@@ -1,6 +1,6 @@
-import { Book } from "./../entities/book.entity";
+import { Book } from "../entities/book.entity";
 import { getConnection, getRepository } from "typeorm";
-import { createTypeOrmConnection } from "./../utils/createtypeormconnection";
+import { createTypeOrmConnection } from "../utils/createtypeormconnection";
 beforeEach(() => createTypeOrmConnection());
 afterEach(() => {
   let conn = getConnection();

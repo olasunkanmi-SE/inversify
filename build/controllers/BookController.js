@@ -161,7 +161,7 @@ var BookController = /** @class */ (function () {
     ], BookController.prototype, "createBook", null);
     BookController = __decorate([
         inversify_express_utils_1.controller("/api/books"),
-        __param(0, inversify_1.inject(types_1.TYPE.BookServiceRepository)),
+        __param(0, inversify_1.inject(types_1.TYPE.BookRepository)),
         __metadata("design:paramtypes", [Object])
     ], BookController);
     return BookController;

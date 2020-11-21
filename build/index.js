@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
-var bookService_1 = require("./services/bookService");
+var BookService_1 = require("./services/BookService");
 var inversify_express_utils_1 = require("inversify-express-utils");
 var inversify_config_1 = require("./inversify.config");
 var book_repo_1 = require("./repository/book-repo");
@@ -12,8 +12,8 @@ var bodyParser = require("body-parser");
 var morgan = require("morgan");
 //Create the IOC container
 var container = new inversify_1.Container();
-container.bind(types_1.TYPE.BookRepository).to(book_repo_1.BookRepository).inSingletonScope();
-container.bind(types_1.TYPE.BookServiceRepository).to(bookService_1.BookService).inSingletonScope();
+var bookRepo = container.bind(types_1.TYPE.BookRepository).to(book_repo_1.BookRepository).inSingletonScope();
+new BookService_1.BookService(bookRepo);
 container.loadAsync(inversify_config_1.containerBidings);
 var server = new inversify_express_utils_1.InversifyExpressServer(container);
 //Configure the Server

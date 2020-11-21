@@ -36,9 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var book_entity_1 = require("./../entities/book.entity");
+var book_entity_1 = require("../entities/book.entity");
 var typeorm_1 = require("typeorm");
-var createtypeormconnection_1 = require("./../utils/createtypeormconnection");
+var createtypeormconnection_1 = require("../utils/createtypeormconnection");
 beforeEach(function () { return createtypeormconnection_1.createTypeOrmConnection(); });
 afterEach(function () {
     var conn = typeorm_1.getConnection();

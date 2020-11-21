@@ -1,5 +1,4 @@
-import { BookService } from "./../services/bookService";
+import { BookService } from "../services/BookService";
 export const TYPE = {
   BookRepository: Symbol("BookRepository"),
-  BookServiceRepository: Symbol.for("BookServiceRepository"),
 };
