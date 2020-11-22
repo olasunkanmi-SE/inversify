@@ -12,7 +12,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["**/*.ts", "src/tests/bookservice"],
+  "include": ["**/*.ts", "src/tests/bookservice.spec.ts", "src/tests/bookservice"],
   "exclude": ["node_modules"],
   "baseUrl": "./"
 }
