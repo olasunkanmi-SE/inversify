@@ -1,6 +1,7 @@
+
+import { IBookRepository } from "./../repository/book-repo.interface";
 import { Search, Sort } from "./../model/search";
 import { TYPE } from "./../constants/types";
-import { BookService } from "./../services/bookService";
 import * as express from "express";
 import {
   controller,
@@ -20,8 +21,8 @@ import { validateBookRequest } from "../middleware/books.validation";
 @controller("/api/books")
 export class BookController {
   private constructor(
-    @inject(TYPE.BookService)
-    private bookService: BookService
+    @inject(TYPE.BookRepository)
+    private bookService: IBookRepository
   ) {}
 
   /**
@@ -43,7 +44,7 @@ export class BookController {
   ) {
     //Create the search Algorithm
     let searchOptions: Search = {
-      // where: [{ title }, { author }, { genre }, { id }, { year }],
+      where: [{ title }, { author }, { genre }, { id }, { year }],
       order: {
         title: sortOrder,
       },

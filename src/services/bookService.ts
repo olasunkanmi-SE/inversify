@@ -4,11 +4,8 @@ import { Book } from "../entities/book.entity";
 import { TYPE } from "../constants/types";
 
 @injectable()
-export class BookService implements IBookRepository {
-  public constructor(
-    @inject(TYPE.BookRepository)
-    private readonly bookRepository: IBookRepository
-  ) {}
+export class BookService {
+  public constructor(private readonly bookRepository: IBookRepository) {}
 
   /**
    * call the bookrepository's getbooks method to retrieve books *
