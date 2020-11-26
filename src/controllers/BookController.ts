@@ -43,7 +43,7 @@ export class BookController {
   ) {
     //Create the search Algorithm
     let searchOptions: Search = {
-      // where: [{ title }, { author }, { genre }, { id }, { year }],
+      where: [{ title }, { author }, { genre }, { id }, { year }],
       order: {
         title: sortOrder,
       },

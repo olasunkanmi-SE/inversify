@@ -79,7 +79,7 @@ var BookController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         searchOptions = {
-                            // where: [{ title }, { author }, { genre }, { id }, { year }],
+                            where: [{ title: title }, { author: author }, { genre: genre }, { id: id }, { year: year }],
                             order: {
                                 title: sortOrder,
                             },

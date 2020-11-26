@@ -23,6 +23,8 @@ describe("BookService test", () => {
     let result = bookService.getBooks();
     expect(mock.getBooks).toHaveBeenCalled();
     expect((await result).length).toBe(2);
+    //negative test
+    // expect(await result).toBe(3);
   });
 
   //Test to create a new book`
@@ -41,5 +43,7 @@ describe("BookService test", () => {
     let result = bookService.createBook(new Book(3, "tales by the moonlight", "Raymond", "description", "tales", 1997));
     expect(mock.createBook).toHaveBeenCalled();
     expect(await result).toBe(3);
+    //negative test
+    // expect(await result).toBe(4);
   });
 });
