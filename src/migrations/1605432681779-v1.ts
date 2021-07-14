@@ -1,3 +1,6 @@
+/* eslint-disable quotes */
+/* eslint linebreak-style: ["error", "unix"] */
+/* eslint no-param-reassign: "error" */
 import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class v11605432681779 implements MigrationInterface {

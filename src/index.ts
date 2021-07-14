@@ -14,7 +14,10 @@ import { TYPE } from "./constants/types";
 
 // Create the IOC container
 const container = new Container();
-const bookRepo: any = container.bind<IBookRepository>(TYPE.BookRepository).to(BookRepository).inSingletonScope();
+const bookRepo: any = container
+  .bind<IBookRepository>(TYPE.BookRepository)
+  .to(BookRepository)
+  .inSingletonScope();
 // eslint-disable-next-line no-new
 new BookService(bookRepo);
 container.loadAsync(containerBidings);

@@ -1,8 +1,13 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable lines-between-class-members */
+/* eslint linebreak-style: ["error", "unix"] */
+/* eslint no-param-reassign: "error" */
 
-import { IBookRepository } from "./book-repo.interface";
-import { getConnection } from "typeorm";
-import { Book } from "../entities/book.entity";
 import { injectable } from "inversify";
+import { getConnection } from "typeorm";
+import { IBookRepository } from "./book-repo.interface";
+import { Book } from "../entities/book.entity";
 
 @injectable()
 export class BookRepository implements IBookRepository {
@@ -24,7 +29,9 @@ export class BookRepository implements IBookRepository {
    */
 
   async getBooks(searchoptions?: any): Promise<Book[]> {
-    const books = await this.getBookRepository().then((bookRepository) => bookRepository.find(searchoptions));
+    const books = await this.getBookRepository().then((bookRepository) =>
+      bookRepository.find(searchoptions)
+    );
     return books;
   }
 
@@ -35,7 +42,9 @@ export class BookRepository implements IBookRepository {
    */
 
   async createBook(book: Book): Promise<Book> {
-    let newBook = await this.getBookRepository().then((bookRepository) => bookRepository.save(book));
+    const newBook = await this.getBookRepository().then((bookRepository) =>
+      bookRepository.save(book)
+    );
     return newBook;
   }
 }

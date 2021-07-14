@@ -7,7 +7,7 @@
     "test-server": "NODE_ENV=development ts-node src/index.ts",
     "test": "NODE_ENV=development jest",
     "start:run": "NODE_ENV=development nodemon index.js",
-    "start:build": "tsc -w",
+    "tsc:build": "tsc -w",
     "start": "concurrently npm:start:*",
     "build": "gulp build",
     "rebuild": "gulp rebuild"

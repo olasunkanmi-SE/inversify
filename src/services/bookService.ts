@@ -8,8 +8,7 @@ import { IBookRepository } from "../repository/book-repo.interface";
 @injectable()
 // eslint-disable-next-line padded-blocks
 export class BookService {
-
-  private _bookRepository: IBookRepository
+  private _bookRepository: IBookRepository;
 
   public constructor(
     @inject(TYPE.BookRepository) bookRepository: IBookRepository

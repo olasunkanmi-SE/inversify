@@ -1,6 +1,7 @@
+/* eslint linebreak-style: ["error", "unix"] */
+/* eslint no-param-reassign: "error" */
 import { check } from "express-validator";
 
-//Validate user input to create a new book
 export const validateBookRequest = [
   check("title", "Book title must be at least 5 characters long")
     .isLength({
