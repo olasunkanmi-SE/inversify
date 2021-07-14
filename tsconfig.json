@@ -4,15 +4,23 @@
     "lib": ["es6"],
     "types": ["reflect-metadata", "jest"],
     "typeRoots": ["./node_modules/@types"],
-    "outDir": "./build",
+    "outDir": "dist",
     "rootDir": "./src",
     "strict": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "allowUnreachableCode": false,
+    "noImplicitThis": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["**/*.ts", "src/tests/bookservice.spec.ts", "src/tests/bookservice"],
+  "include": ["**/*.ts", "src/tests/*.spec.ts"],
   "exclude": ["node_modules"],
   "baseUrl": "./"
 }

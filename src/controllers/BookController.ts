@@ -1,7 +1,5 @@
-
-import { IBookRepository } from "./../repository/book-repo.interface";
-import { Search, Sort } from "./../model/search";
-import { TYPE } from "./../constants/types";
+/* eslint linebreak-style: ["error", "unix"] */
+/* eslint no-param-reassign: "error" */
 import * as express from "express";
 import {
   controller,
@@ -9,21 +7,26 @@ import {
   httpPost,
   response,
   request,
-  requestParam,
-  requestBody,
   queryParam,
 } from "inversify-express-utils";
-import { Book } from "../entities/book.entity";
 import { inject } from "inversify";
 import { validationResult } from "express-validator";
+import { IBookRepository } from "../repository/book-repo.interface";
+import { Search, Sort } from "../model/search";
+import { TYPE } from "../constants/types";
+import { Book } from "../entities/book.entity";
 import { validateBookRequest } from "../middleware/books.validation";
 
 @controller("/api/books")
 export class BookController {
+  private _bookService: IBookRepository
+
   private constructor(
-    @inject(TYPE.BookRepository)
-    private bookService: IBookRepository
-  ) {}
+    @inject(TYPE.BookRepository) bookService: IBookRepository
+
+  ) {
+    this._bookService = bookService;
+  }
 
   /**
    * create the API endpoint to retieve books *
@@ -31,6 +34,7 @@ export class BookController {
    */
 
   @httpGet("/")
+  // eslint-disable-next-line consistent-return
   async getBooks(
     @response() res: express.Response,
     @queryParam("sortOrder") sortOrder: Sort,
@@ -42,17 +46,17 @@ export class BookController {
     @queryParam("take") take: number,
     @queryParam("id") id: number
   ) {
-    //Create the search Algorithm
-    let searchOptions: Search = {
+    // Create the search Algorithm
+    const searchOptions: Search = {
       where: [{ title }, { author }, { genre }, { id }, { year }],
       order: {
         title: sortOrder,
       },
-      skip: skip,
-      take: take,
+      skip,
+      take,
     };
     try {
-      return await this.bookService.getBooks(searchOptions);
+      return await this._bookService.getBooks(searchOptions);
     } catch (error) {
       res.status(500);
       res.send(error.message);
@@ -66,19 +70,20 @@ export class BookController {
    */
 
   @httpPost("/create", ...validateBookRequest)
+  // eslint-disable-next-line consistent-return
   async createBook(@request() req: express.Request, @response() res: express.Response) {
     try {
       const errors: any = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).send(errors);
       }
-      let newBook = await new Book();
+      const newBook = await new Book();
       newBook.title = req.body.title;
       newBook.author = req.body.author;
       newBook.genre = req.body.genre;
       newBook.description = req.body.description;
       newBook.year = req.body.year;
-      return await this.bookService.createBook(newBook);
+      return await this._bookService.createBook(newBook);
     } catch (error) {
       res.status(500);
       res.send(error.message);

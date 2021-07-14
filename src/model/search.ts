@@ -1,3 +1,6 @@
+/* eslint linebreak-style: ["error", "unix"] */
+/* eslint no-param-reassign: "error" */
+/* eslint-disable no-shadow */
 export enum Sort {
   asc = "ASC",
   des = "DES",

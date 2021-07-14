@@ -1,11 +1,21 @@
-import { IBookRepository } from "../repository/book-repo.interface";
+/* eslint linebreak-style: ["error", "unix"] */
+/* eslint no-param-reassign: "error" */
 import { inject, injectable } from "inversify";
-import { Book } from "../entities/book.entity";
 import { TYPE } from "../constants/types";
+import { Book } from "../entities/book.entity";
+import { IBookRepository } from "../repository/book-repo.interface";
 
 @injectable()
+// eslint-disable-next-line padded-blocks
 export class BookService {
-  public constructor(private readonly bookRepository: IBookRepository) {}
+
+  private _bookRepository: IBookRepository
+
+  public constructor(
+    @inject(TYPE.BookRepository) bookRepository: IBookRepository
+  ) {
+    this._bookRepository = bookRepository;
+  }
 
   /**
    * call the bookrepository's getbooks method to retrieve books *
@@ -13,7 +23,7 @@ export class BookService {
    */
 
   async getBooks(searchoptions?: any): Promise<Book[]> {
-    const books = await this.bookRepository.getBooks(searchoptions);
+    const books = await this._bookRepository.getBooks(searchoptions);
     return books;
   }
 
@@ -24,7 +34,7 @@ export class BookService {
    */
 
   async createBook(book: Book): Promise<Book> {
-    const newBook = await this.bookRepository.createBook(book);
+    const newBook = await this._bookRepository.createBook(book);
     return newBook;
   }
 }
