@@ -1,5 +1,3 @@
 # dependencies
-/node_modules
-
-#js files
 /build
+/node_modules
