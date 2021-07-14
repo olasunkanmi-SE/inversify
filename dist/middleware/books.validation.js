@@ -26,3 +26,4 @@ exports.validateBookRequest = [
         .trim(),
     express_validator_1.check("year", "Book year must be a number").isInt(),
 ];
+//# sourceMappingURL=books.validation.js.map

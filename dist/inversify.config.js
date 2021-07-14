@@ -16,3 +16,4 @@ const BookController_1 = require("./controllers/BookController");
 exports.containerBidings = new inversify_1.AsyncContainerModule((bind) => __awaiter(void 0, void 0, void 0, function* () {
     yield BookController_1.BookController;
 }));
+//# sourceMappingURL=inversify.config.js.map

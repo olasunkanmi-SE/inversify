@@ -6,3 +6,4 @@
 //   const dbConfig = await createConnection(ormconfig);
 //   return dbConfig;
 // }
+//# sourceMappingURL=db.js.map

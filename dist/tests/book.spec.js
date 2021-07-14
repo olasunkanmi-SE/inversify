@@ -30,3 +30,4 @@ test("store created book and fetch it", () => __awaiter(void 0, void 0, void 0, 
     });
     expect(newBook[0].author).toBe("Raymond");
 }));
+//# sourceMappingURL=book.spec.js.map

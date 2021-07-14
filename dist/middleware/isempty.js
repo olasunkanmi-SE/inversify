@@ -8,3 +8,4 @@ const isEmpty = (value) => {
         (typeof value === "string" && value.length === 0));
 };
 exports.isEmpty = isEmpty;
+//# sourceMappingURL=isempty.js.map

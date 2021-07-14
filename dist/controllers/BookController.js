@@ -22,17 +22,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookController = void 0;
-const search_1 = require("./../model/search");
-const types_1 = require("./../constants/types");
+/* eslint linebreak-style: ["error", "unix"] */
+/* eslint no-param-reassign: "error" */
 const express = require("express");
 const inversify_express_utils_1 = require("inversify-express-utils");
-const book_entity_1 = require("../entities/book.entity");
 const inversify_1 = require("inversify");
 const express_validator_1 = require("express-validator");
+const search_1 = require("../model/search");
+const types_1 = require("../constants/types");
+const book_entity_1 = require("../entities/book.entity");
 const books_validation_1 = require("../middleware/books.validation");
 let BookController = class BookController {
     constructor(bookService) {
-        this.bookService = bookService;
+        this._bookService = bookService;
     }
     /**
      * create the API endpoint to retieve books *
@@ -40,17 +42,17 @@ let BookController = class BookController {
      */
     getBooks(res, sortOrder, author, genre, title, year, skip, take, id) {
         return __awaiter(this, void 0, void 0, function* () {
-            //Create the search Algorithm
-            let searchOptions = {
+            // Create the search Algorithm
+            const searchOptions = {
                 where: [{ title }, { author }, { genre }, { id }, { year }],
                 order: {
                     title: sortOrder,
                 },
-                skip: skip,
-                take: take,
+                skip,
+                take,
             };
             try {
-                return yield this.bookService.getBooks(searchOptions);
+                return yield this._bookService.getBooks(searchOptions);
             }
             catch (error) {
                 res.status(500);
@@ -70,13 +72,13 @@ let BookController = class BookController {
                 if (!errors.isEmpty()) {
                     return res.status(400).send(errors);
                 }
-                let newBook = yield new book_entity_1.Book();
+                const newBook = yield new book_entity_1.Book();
                 newBook.title = req.body.title;
                 newBook.author = req.body.author;
                 newBook.genre = req.body.genre;
                 newBook.description = req.body.description;
                 newBook.year = req.body.year;
-                return yield this.bookService.createBook(newBook);
+                return yield this._bookService.createBook(newBook);
             }
             catch (error) {
                 res.status(500);
@@ -114,3 +116,4 @@ BookController = __decorate([
     __metadata("design:paramtypes", [Object])
 ], BookController);
 exports.BookController = BookController;
+//# sourceMappingURL=BookController.js.map

@@ -41,3 +41,4 @@ Book = __decorate([
     typeorm_1.Entity({ name: "books" })
 ], Book);
 exports.Book = Book;
+//# sourceMappingURL=book.entity.js.map

@@ -10,10 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createTypeOrmConnection = void 0;
+/* eslint linebreak-style: ["error", "unix"] */
+/* eslint no-param-reassign: "error" */
 const typeorm_1 = require("typeorm");
 const createTypeOrmConnection = () => __awaiter(void 0, void 0, void 0, function* () {
     const connType = process.env.NODE_ENV;
     const connectionOptions = yield typeorm_1.getConnectionOptions(connType);
-    return yield typeorm_1.createConnection(Object.assign(Object.assign({}, connectionOptions), { name: "default" }));
+    return typeorm_1.createConnection(Object.assign(Object.assign({}, connectionOptions), { name: "default" }));
 });
 exports.createTypeOrmConnection = createTypeOrmConnection;
+//# sourceMappingURL=createtypeormconnection.js.map

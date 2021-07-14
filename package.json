@@ -8,7 +8,9 @@
     "test": "NODE_ENV=development jest",
     "start:run": "NODE_ENV=development nodemon index.js",
     "start:build": "tsc -w",
-    "start": "concurrently npm:start:*"
+    "start": "concurrently npm:start:*",
+    "build": "gulp build",
+    "rebuild": "gulp rebuild"
   },
   "jest": {
     "transform": {

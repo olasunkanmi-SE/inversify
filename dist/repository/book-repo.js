@@ -53,3 +53,4 @@ BookRepository = __decorate([
     inversify_1.injectable()
 ], BookRepository);
 exports.BookRepository = BookRepository;
+//# sourceMappingURL=book-repo.js.map
