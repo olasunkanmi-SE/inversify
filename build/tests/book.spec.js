@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -47,20 +36,34 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createTypeOrmConnection = void 0;
+var book_entity_1 = require("../entities/book.entity");
 var typeorm_1 = require("typeorm");
-var createTypeOrmConnection = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var connType, connectionOptions;
+var createtypeormconnection_1 = require("../utils/createtypeormconnection");
+beforeEach(function () { return createtypeormconnection_1.createTypeOrmConnection(); });
+afterEach(function () {
+    var conn = typeorm_1.getConnection();
+    return conn.close();
+});
+test("store created book and fetch it", function () { return __awaiter(void 0, void 0, void 0, function () {
+    var newBook;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                connType = process.env.NODE_ENV;
-                return [4 /*yield*/, typeorm_1.getConnectionOptions(connType)];
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(book_entity_1.Book).insert({
+                    title: "Ralia the sugar girl",
+                    author: "Raymond",
+                    description: "I dont have des for now",
+                    genre: "fiction",
+                    year: 2002,
+                })];
             case 1:
-                connectionOptions = _a.sent();
-                return [4 /*yield*/, typeorm_1.createConnection(__assign(__assign({}, connectionOptions), { name: "default" }))];
-            case 2: return [2 /*return*/, _a.sent()];
+                _a.sent();
+                return [4 /*yield*/, typeorm_1.getRepository(book_entity_1.Book).find({
+                        where: { genre: "fiction" },
+                    })];
+            case 2:
+                newBook = _a.sent();
+                expect(newBook[0].author).toBe("Raymond");
+                return [2 /*return*/];
         }
     });
-}); };
-exports.createTypeOrmConnection = createTypeOrmConnection;
+}); });

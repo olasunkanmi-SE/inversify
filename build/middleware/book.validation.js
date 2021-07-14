@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateBook = void 0;
 var validator_1 = require("validator");
 var isempty_1 = require("./isempty");
-exports.validateBook = function (data) {
+var validateBook = function (data) {
     var errors = {};
     if (data.title) {
         data.title = !isempty_1.isEmpty(data.title) ? data.title : (errors.title = "Title is required");
@@ -34,3 +34,4 @@ exports.validateBook = function (data) {
         isValid: isempty_1.isEmpty(errors),
     };
 };
+exports.validateBook = validateBook;

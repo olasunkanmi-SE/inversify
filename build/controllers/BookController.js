@@ -47,12 +47,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookController = void 0;
@@ -153,7 +151,7 @@ var BookController = /** @class */ (function () {
         __metadata("design:returntype", Promise)
     ], BookController.prototype, "getBooks", null);
     __decorate([
-        inversify_express_utils_1.httpPost.apply(void 0, __spreadArrays(["/create"], books_validation_1.validateBookRequest)),
+        inversify_express_utils_1.httpPost.apply(void 0, __spreadArray(["/create"], books_validation_1.validateBookRequest)),
         __param(0, inversify_express_utils_1.request()), __param(1, inversify_express_utils_1.response()),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
