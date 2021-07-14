@@ -10,37 +10,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Book = void 0;
-var typeorm_1 = require("typeorm");
-var Book = /** @class */ (function () {
-    function Book() {
-    }
-    __decorate([
-        typeorm_1.PrimaryGeneratedColumn({ type: "integer" }),
-        __metadata("design:type", Number)
-    ], Book.prototype, "id", void 0);
-    __decorate([
-        typeorm_1.Column({ type: "varchar", length: 256 }),
-        __metadata("design:type", String)
-    ], Book.prototype, "title", void 0);
-    __decorate([
-        typeorm_1.Column({ type: "varchar", length: 256 }),
-        __metadata("design:type", String)
-    ], Book.prototype, "author", void 0);
-    __decorate([
-        typeorm_1.Column({ type: "varchar", length: 256 }),
-        __metadata("design:type", String)
-    ], Book.prototype, "description", void 0);
-    __decorate([
-        typeorm_1.Column({ type: "varchar", length: 256 }),
-        __metadata("design:type", String)
-    ], Book.prototype, "genre", void 0);
-    __decorate([
-        typeorm_1.Column({ type: "integer" }),
-        __metadata("design:type", Number)
-    ], Book.prototype, "year", void 0);
-    Book = __decorate([
-        typeorm_1.Entity({ name: "books" })
-    ], Book);
-    return Book;
-}());
+const typeorm_1 = require("typeorm");
+let Book = class Book {
+};
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn({ type: "integer" }),
+    __metadata("design:type", Number)
+], Book.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column({ type: "varchar", length: 256 }),
+    __metadata("design:type", String)
+], Book.prototype, "title", void 0);
+__decorate([
+    typeorm_1.Column({ type: "varchar", length: 256 }),
+    __metadata("design:type", String)
+], Book.prototype, "author", void 0);
+__decorate([
+    typeorm_1.Column({ type: "varchar", length: 256 }),
+    __metadata("design:type", String)
+], Book.prototype, "description", void 0);
+__decorate([
+    typeorm_1.Column({ type: "varchar", length: 256 }),
+    __metadata("design:type", String)
+], Book.prototype, "genre", void 0);
+__decorate([
+    typeorm_1.Column({ type: "integer" }),
+    __metadata("design:type", Number)
+], Book.prototype, "year", void 0);
+Book = __decorate([
+    typeorm_1.Entity({ name: "books" })
+], Book);
 exports.Book = Book;

@@ -4,11 +4,12 @@
   "description": "",
   "main": "build/index.js",
   "scripts": {
-    "test-server": "NODE_ENV=test ts-node src/index.ts",
-    "test": "NODE_ENV=test jest",
+    "test-server": "NODE_ENV=development ts-node src/index.ts",
+    "test": "NODE_ENV=development jest",
     "start:run": "NODE_ENV=development nodemon ts-node-dev index.js",
     "start:build": "tsc -w",
-    "start": "concurrently npm:start:*"
+    "start": "concurrently npm:start:*",
+    "run build":"tsc-w"
   },
   "jest": {
     "transform": {

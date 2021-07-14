@@ -19,7 +19,7 @@ export const validateBookRequest = [
     .trim(),
   check("description", "Book description must be at least 5 characters long")
     .isLength({
-      min: 5,
+      min: 4,
     })
     .trim(),
   check("year", "Book year must be a number").isInt(),

@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateBook = void 0;
-var validator_1 = require("validator");
-var isempty_1 = require("./isempty");
-var validateBook = function (data) {
-    var errors = {};
+const validator_1 = require("validator");
+const isempty_1 = require("./isempty");
+const validateBook = (data) => {
+    let errors = {};
     if (data.title) {
         data.title = !isempty_1.isEmpty(data.title) ? data.title : (errors.title = "Title is required");
         if (!validator_1.default.isLength(data.title, { min: 5, max: 50 })) {
@@ -30,7 +30,7 @@ var validateBook = function (data) {
         }
     }
     return {
-        errors: errors,
+        errors,
         isValid: isempty_1.isEmpty(errors),
     };
 };
