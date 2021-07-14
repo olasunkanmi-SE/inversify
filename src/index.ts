@@ -29,6 +29,6 @@ server.setConfig((app) => {
 let app = server.build();
 // createConnection();
 createTypeOrmConnection();
-app.listen(3000, () => {
+app.listen(5000, () => {
   console.log("Server is listening on port 3000");
 });
