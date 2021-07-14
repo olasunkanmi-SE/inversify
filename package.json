@@ -6,10 +6,9 @@
   "scripts": {
     "test-server": "NODE_ENV=development ts-node src/index.ts",
     "test": "NODE_ENV=development jest",
-    "start:run": "NODE_ENV=development nodemon ts-node-dev index.js",
+    "start:run": "NODE_ENV=development nodemon index.js",
     "start:build": "tsc -w",
-    "start": "concurrently npm:start:*",
-    "run build":"tsc-w"
+    "start": "concurrently npm:start:*"
   },
   "jest": {
     "transform": {
